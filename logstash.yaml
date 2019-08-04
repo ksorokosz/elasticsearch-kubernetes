@@ -16,7 +16,7 @@ data:
     }
     output {
         elasticsearch {
-            hosts => ["http://elasticsearch-loadbalancer:9200"]
+            hosts => ["http://elasticsearch:9200"]
             index => "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
         }
         stdout { 
@@ -32,7 +32,7 @@ metadata:
 data:
   logstash.yml: |
     http.host: "0.0.0.0"
-    xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch-loadbalancer:9200" ]
+    xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
   pipelines.yml: |
     # This file is where you define your pipelines. You can define multiple.
     # For more information on multiple pipelines, see the documentation:

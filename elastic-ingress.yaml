@@ -3,17 +3,20 @@ kind: Ingress
 metadata:
   name: elastic-ingress
   namespace: default
+  annotations:
+    ingress.appscode.com/type: NodePort
+    ingress.appscode.com/use-node-port: "true"
 spec:
   rules:
-  - host: logstash.k8s.default.com
+  - host: logstash.k8s.local
     tcp:
       port: "5044"
       backend:
         serviceName: apache-log-pipeline
         servicePort: "5044"
-  - host: elasticsearch.k8s.default.com
+  - host: elasticsearch.k8s.local
     http:
-      port: "9200"
-      backend:
-        serviceName: elasticsearch
-        servicePort: "9200"
+     paths:
+      - backend:
+          serviceName: elasticsearch
+          servicePort: "9200"
