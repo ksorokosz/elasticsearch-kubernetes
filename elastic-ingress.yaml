@@ -1,0 +1,19 @@
+apiVersion: voyager.appscode.com/v1beta1
+kind: Ingress
+metadata:
+  name: elastic-ingress
+  namespace: default
+spec:
+  rules:
+  - host: logstash.k8s.default.com
+    tcp:
+      port: "5044"
+      backend:
+        serviceName: apache-log-pipeline
+        servicePort: "5044"
+  - host: elasticsearch.k8s.default.com
+    http:
+      port: "9200"
+      backend:
+        serviceName: elasticsearch
+        servicePort: "9200"
